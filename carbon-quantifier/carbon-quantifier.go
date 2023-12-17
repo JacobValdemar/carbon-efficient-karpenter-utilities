@@ -22,7 +22,7 @@ type Instance struct {
 	GWPperHour float64
 }
 
-const BoavizapiBaseURL string = "http://localhost:5001" // or https://api.boavizta.org
+const BoaviztAPIBaseURL string = "http://localhost:5001" // or https://api.boavizta.org
 const OutputLocation string = "zz_generated.carbon.go"
 
 func main() {
@@ -108,7 +108,7 @@ func writeToGoFile(fileName string, instanceList []InstanceList, locationToRegio
 }
 
 func getEmissions(instanceType string, usageLocation string) (float64, float64, float64, float64) {
-	url := BoavizapiBaseURL + "/v1/cloud/instance?verbose=true&duration=1&criteria=gwp"
+	url := BoaviztAPIBaseURL + "/v1/cloud/instance?verbose=true&duration=1&criteria=gwp"
 
 	payload := []byte(`{
 		"provider": "aws",
@@ -147,7 +147,7 @@ func getEmissions(instanceType string, usageLocation string) (float64, float64, 
 }
 
 func getAllInstances() []string {
-	url := BoavizapiBaseURL + "/v1/cloud/instance/all_instances?provider=aws"
+	url := BoaviztAPIBaseURL + "/v1/cloud/instance/all_instances?provider=aws"
 
 	resp, err := http.Get(url)
 	if err != nil {
