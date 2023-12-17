@@ -57,7 +57,7 @@ func main() {
 
 	var result []InstanceList
 
-	for location, _ := range locationToRegion {
+	for location := range locationToRegion {
 		fmt.Printf("%s\n", location)
 		var instancesInThisLocation []Instance
 		for _, instance := range instances {
