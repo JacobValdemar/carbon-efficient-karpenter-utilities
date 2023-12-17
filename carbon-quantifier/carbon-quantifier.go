@@ -30,7 +30,7 @@ func main() {
 	allInstances = filterInstances(allInstances)
 
 	// TODO: Use all regions in https://github.com/vantage-sh/ec2instances.info/blob/master/meta/regions_aws.yaml
-	var locationToRegion map[string][]string = map[string][]string{
+	var locations map[string][]string = map[string][]string{
 		"USA": {"us-east-1", "us-east-2", "us-west-1", "us-west-2"},
 		"ZAF": {"af-south-1"},
 		"HKG": {"ap-east-1"},
@@ -57,7 +57,7 @@ func main() {
 
 	var result []ImpactList
 
-	for location := range locationToRegion {
+	for location := range locations {
 		fmt.Printf("%s\n", location)
 		var impacts []Impact
 
@@ -83,7 +83,7 @@ func main() {
 		return result[i].Location < result[j].Location
 	})
 
-	writeToGoFile(OutputLocation, result, locationToRegion)
+	writeToGoFile(OutputLocation, result, locations)
 }
 
 func writeToGoFile(fileName string, instanceList []ImpactList, locationToRegion map[string][]string) {
